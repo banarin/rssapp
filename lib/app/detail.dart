@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:fluxrss/components/myText.dart';
-import 'package:webfeed/domain/rss_item.dart';
+import 'package:fluxrss/components/my%20_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webfeed/domain/rss_item.dart';
 
-class detailPage extends StatefulWidget {
-  detailPage(this.items, this.i, {super.key});
-  List<RssItem>? items;
-  int i;
+class DetailPage extends StatefulWidget {
+  const DetailPage(this.items, this.i, {super.key});
+  final List<RssItem>? items;
+  final int i;
 
   @override
-  State<detailPage> createState() => _detailPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
-class _detailPageState extends State<detailPage> {
+class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class _detailPageState extends State<detailPage> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: FaIcon(
+            icon: const FaIcon(
               FontAwesomeIcons.arrowLeft,
               color: Colors.white,
             ),
@@ -35,7 +35,7 @@ class _detailPageState extends State<detailPage> {
           children: [
             Container(
               height: MediaQuery.sizeOf(context).height / 2.5,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 image: DecorationImage(
@@ -51,7 +51,7 @@ class _detailPageState extends State<detailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         color: Colors.white60,
                         borderRadius: BorderRadius.circular(20.0)),
@@ -63,7 +63,7 @@ class _detailPageState extends State<detailPage> {
                 ],
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
               child: Text(
                 'Description',
@@ -74,12 +74,12 @@ class _detailPageState extends State<detailPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: myText(widget.items![widget.i].description.toString(),
                   TextAlign.start, 17, Colors.grey),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: InkWell(
                 onTap: () async {
                   _launchUrl();
@@ -97,12 +97,11 @@ class _detailPageState extends State<detailPage> {
           ],
         ));
   }
+
   Future<void> _launchUrl() async {
-  final Uri _url = Uri.parse(widget.items![widget.i].link!.toString());
-  if (!await launchUrl(_url)) {
-    throw Exception('Could not launch $_url');
+    final Uri url = Uri.parse(widget.items![widget.i].link!.toString());
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }
-}
-
-

@@ -1,5 +1,6 @@
-import 'package:webfeed/webfeed.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:webfeed/webfeed.dart';
 
 class Parser {
   Future loadRss() async {
@@ -9,7 +10,7 @@ class Parser {
       RssFeed feed = RssFeed.parse(response.body.toString());
       return feed.items;
     } else {
-      print("erreur: ${response.statusCode}");
+      debugPrint("erreur: ${response.statusCode}");
     }
   }
 }
